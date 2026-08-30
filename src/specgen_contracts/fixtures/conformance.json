@@ -1,0 +1,14 @@
+{
+  "schema": "specgen/shared-contract-conformance/v1",
+  "bundle_version": "0.1.0",
+  "cases": [
+    {"id": "source-baseline-valid", "schema_id": "agent-workflow/source-baseline/v1", "valid": true,
+     "document": {"schema": "agent-workflow/source-baseline/v1", "generated_at": "2026-08-30T00:00:00Z", "components": {}}},
+    {"id": "source-baseline-missing-components", "schema_id": "agent-workflow/source-baseline/v1", "valid": false,
+     "document": {"schema": "agent-workflow/source-baseline/v1", "generated_at": "2026-08-30T00:00:00Z"}},
+    {"id": "task-result-valid", "schema_id": "agent-workflow/task-result/v1", "valid": true,
+     "document": {"schema": "agent-workflow/task-result/v1", "status": "completed", "summary": "ok", "outputs": {}}},
+    {"id": "task-result-invalid-status", "schema_id": "agent-workflow/task-result/v1", "valid": false,
+     "document": {"schema": "agent-workflow/task-result/v1", "status": "accepted", "summary": "bad", "outputs": {}}}
+  ]
+}

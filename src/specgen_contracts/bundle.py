@@ -5,10 +5,11 @@ import json
 from importlib.resources import files
 from typing import Any
 
-BUNDLE_VERSION = "0.1.0"
+BUNDLE_VERSION = "0.2.0"
 SUPPORTED_VERSIONS = (BUNDLE_VERSION,)
 SCHEMA_FILES = {
     "agent-workflow/prompt-pack/v1": "pack.schema.json",
+    "agent-workflow/prompt-pack/v2": "pack-v2.schema.json",
     "agent-workflow/evaluation-plan/v1": "evaluation-plan.schema.json",
     "agent-workflow/source-baseline/v1": "source-baseline.schema.json",
     "agent-workflow/agent-role/v1": "agent-role-v1.schema.json",
@@ -48,8 +49,14 @@ def validate(schema_id: str, document: Any) -> list[dict[str, Any]]:
     """Return actionable diagnostics; an empty list means valid."""
     from jsonschema import Draft202012Validator
     validator = Draft202012Validator(schema(schema_id))
-    return [{"path": list(error.absolute_path), "message": error.message, "validator": error.validator}
-            for error in sorted(validator.iter_errors(document), key=lambda error: list(error.absolute_path))]
+    errors = [{"path": list(error.absolute_path), "message": error.message, "validator": error.validator}
+              for error in sorted(validator.iter_errors(document), key=lambda error: list(error.absolute_path))]
+    if not errors and schema_id == "agent-workflow/prompt-pack/v2":
+        provenance = document["bundle_provenance"]
+        if provenance["schema_digest"] != schema_digest(schema_id):
+            errors.append({"path": ["bundle_provenance", "schema_digest"],
+                           "message": "schema digest does not match the installed v2 schema", "validator": "digest"})
+    return errors
 
 
 def descriptor(schema_id: str, document: Any) -> dict[str, Any]:

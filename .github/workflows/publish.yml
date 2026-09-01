@@ -5,8 +5,7 @@ on:
     tags: ["v*.*.*"]
 
 permissions:
-  contents: read
-  packages: write
+  contents: write
 
 jobs:
   publish:
@@ -21,8 +20,11 @@ jobs:
       - run: python -m pip install "build>=1.2,<2" "twine>=5,<7"
       - run: python -m build --wheel --outdir dist
       - name: Publish wheel to GitHub Packages
-        env:
-          TWINE_USERNAME: ${{ github.actor }}
-          TWINE_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
-          TWINE_REPOSITORY_URL: https://pypi.pkg.github.com/ngallodev-software/
-        run: python -m twine upload --non-interactive dist/*.whl
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/*.whl
+        # env:
+        #   TWINE_USERNAME: ${{ github.actor }}
+        #   TWINE_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+        #   TWINE_REPOSITORY_URL: https://pypi.pkg.github.com/ngallodev-software/
+        # run: python -m twine upload --non-interactive dist/*.whl

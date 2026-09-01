@@ -1,5 +1,6 @@
 import json
 from copy import deepcopy
+from pathlib import Path
 
 import pytest
 
@@ -9,7 +10,7 @@ from specgen_contracts.migration import migrate
 
 
 def test_all_frozen_schema_digests_match_baseline():
-    baseline = json.load(open("/lump/apps/specgen-aw/docs/research/SHARED_CONTRACT_FIXTURE_BASELINE_20260830.json"))
+    baseline = json.load(open(Path(__file__).parent / "fixtures" / "baseline.json"))
     expected = {item["schema_id"]: item["sha256"] for item in baseline["sources"][0]["files"]}
     actual = {key: schema_digest(key) for key in SCHEMA_FILES}
     assert {key: actual[key] for key in expected} == expected

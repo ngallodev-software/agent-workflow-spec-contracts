@@ -1,6 +1,11 @@
 # Supported versions
 
-Bundle `0.2.0` is the supported release. Releases are immutable: a
+Bundle `0.2.0` is the supported semantic release. Its published Python
+distribution is `0.2.1`, a distribution-only patch carrying semantic bundle
+`0.2.0` and published as a GitHub Release wheel asset. It does not introduce
+bundle `0.2.1` or change any shared schema bytes or meaning.
+
+Releases are immutable: a
 change to shared meaning, schema bytes, IDs, or canonicalization requires a
 new semantic-versioned release and an explicit deterministic migration from
 each supported prior release. Unknown versions and schema digests fail closed.

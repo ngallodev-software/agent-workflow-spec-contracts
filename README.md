@@ -1,5 +1,12 @@
 # Agent-Workflow Shared Contracts
 
+## Quick summary
+
+- **What it is:** the small, versioned contract package shared by SpecGen and Agent-Workflow.
+- **Why it exists:** both projects need to agree on the meaning of the handoff without duplicating schemas or importing each other's runtime.
+- **Key boundary:** SpecGen owns specification authoring; this package owns immutable shared schemas/fixtures; Agent-Workflow owns execution and lifecycle authority.
+- **Versioning rule:** published semantic contract bytes are immutable; packaging-only changes can advance the distribution without redefining contract meaning.
+
 `agent-workflow-spec-contracts` publishes the immutable, versioned semantic
 contracts shared by [SpecGen](https://github.com/ngallodev-software/specgen-aw)
 and [Agent-Workflow](https://github.com/ngallodev-software/agent-workflow).

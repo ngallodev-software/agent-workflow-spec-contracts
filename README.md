@@ -1,6 +1,6 @@
 # Agent-Workflow Shared Contracts
 
-## Quick summary
+## Summary
 
 - **What it is:** the small, versioned contract package shared by SpecGen and Agent-Workflow.
 - **Why it exists:** both projects need to agree on the meaning of the handoff without duplicating schemas or importing each other's runtime.

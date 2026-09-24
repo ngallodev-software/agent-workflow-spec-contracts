@@ -6,9 +6,17 @@ build-backend = "setuptools.build_meta"
 name = "specgen-agent-workflow-contracts"
 version = "0.2.1"
 description = "Immutable shared semantic contracts for SpecGen and Agent-Workflow"
+readme = "README.md"
+authors = [{name = "ngallodev-software"}]
+keywords = ["agent-workflow", "specgen", "contracts", "json-schema", "provenance"]
 license = "Apache-2.0"
 requires-python = ">=3.10"
 dependencies = ["jsonschema>=4.18"]
+
+[project.urls]
+Repository = "https://github.com/ngallodev-software/agent-workflow-spec-contracts"
+SpecGen = "https://github.com/ngallodev-software/specgen-aw"
+AgentWorkflow = "https://github.com/ngallodev-software/agent-workflow"
 
 [project.scripts]
 contract-bundle = "specgen_contracts.cli:main"

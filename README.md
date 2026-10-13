@@ -2,18 +2,24 @@
 
 ## Summary
 
-- **What it is:** the small, versioned contract package shared by SpecGen and Agent-Workflow.
-- **Why it exists:** both projects need to agree on the meaning of the handoff without duplicating schemas or importing each other's runtime.
-- **Key boundary:** SpecGen owns specification authoring; this package owns immutable shared schemas/fixtures; Agent-Workflow owns execution and lifecycle authority.
+- **What it is:** the frozen, versioned compatibility contract package for the historical SpecGen → Agent-Workflow `native-job/v1` handoff.
+- **Why it remains:** existing v1 jobs and sealed historical evidence must retain their original contract meaning while new Agent-Workflow planning moves to OpenSpec-backed `native-job/v2`.
+- **Key boundary:** this package preserves legacy handoff semantics only; OpenSpec-backed v2 jobs do not negotiate or require it.
 - **Versioning rule:** published semantic contract bytes are immutable; packaging-only changes can advance the distribution without redefining contract meaning.
 
 `agent-workflow-spec-contracts` publishes the immutable, versioned semantic
 contracts shared by [SpecGen](https://github.com/ngallodev-software/specgen-aw)
 and [Agent-Workflow](https://github.com/ngallodev-software/agent-workflow).
 
-Its purpose is deliberately narrow: keep the meaning of the SpecGen →
-Agent-Workflow handoff in one dependency-neutral package so neither repository
-has to duplicate schemas or import the other's runtime.
+Its purpose is deliberately narrow: preserve the meaning of the historical
+SpecGen → Agent-Workflow v1 handoff in one dependency-neutral package so neither
+repository has to rewrite previously published schemas or sealed evidence.
+
+For new planning work, Agent-Workflow now has a qualified OpenSpec 1.13.2 import
+path that produces Agent-Workflow-owned `native-job/v2` contracts. That path
+does not negotiate this bundle. Retirement of this package as a mandatory
+Agent-Workflow dependency is a separate compatibility change; the published
+v1 bundle remains immutable.
 
 ## Ownership boundary
 
